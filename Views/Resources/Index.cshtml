@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GameDevResources.Models.Resource>
+
+@{
+    ViewData["Title"] = "Resources";
+}
+
+<h1>Resources</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pricing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@item.URL" target="_blank">
+                        @Html.DisplayFor(modelItem => item.Name)
+
+                    </a>
+                </td>
+                <td class="table-cell-min">
+                    <div class="chip" style="background-color: @item.Type.ToColor()">
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </div>
+                </td>
+                <td class="table-cell-min">
+                    @Html.DisplayFor(modelItem => item.Pricing)
+                </td>
+                <td>
+                    @foreach (string tag in item.Tags)
+                    {
+                        <div class="chip" style="background-color: @item.Type.ToColor()">
+                            @tag
+                        </div>
+                    }
+                </td>
+                <td class="table-cell-min">
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
