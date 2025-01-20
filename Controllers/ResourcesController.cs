@@ -14,18 +14,21 @@ namespace GameDevResources.Controllers
     {
         private readonly GameDevResourcesContext _context;
 
+        // Constructor to initialize the context
         public ResourcesController(GameDevResourcesContext context)
         {
             _context = context;
         }
 
         // GET: Resources
+        // Displays a list of all resources
         public async Task<IActionResult> Index()
         {
             return View(await _context.Resource.ToListAsync());
         }
 
         // GET: Resources/Details/5
+        // Displays details of a specific resource
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,20 +47,21 @@ namespace GameDevResources.Controllers
         }
 
         // GET: Resources/Create
+        // Displays the form to create a new resource
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Resources/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Handles the form submission to create a new resource
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Name,Type,URL,Pricing,Tags")] Resource resource)
         {
             if (ModelState.IsValid)
             {
+                resource.Icon = GetIconUrl(resource.URL);
                 _context.Add(resource);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,6 +70,7 @@ namespace GameDevResources.Controllers
         }
 
         // GET: Resources/Edit/5
+        // Displays the form to edit an existing resource
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,8 +87,7 @@ namespace GameDevResources.Controllers
         }
 
         // POST: Resources/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Handles the form submission to edit an existing resource
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Type,URL,Pricing,Tags")] Resource resource)
@@ -97,6 +101,7 @@ namespace GameDevResources.Controllers
             {
                 try
                 {
+                    resource.Icon = GetIconUrl(resource.URL);
                     resource.Tags = resource.Tags[0].Split(",").ToList();
                     _context.Update(resource);
                     await _context.SaveChangesAsync();
@@ -118,6 +123,7 @@ namespace GameDevResources.Controllers
         }
 
         // GET: Resources/Delete/5
+        // Displays the form to confirm deletion of a resource
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace GameDevResources.Controllers
         }
 
         // POST: Resources/Delete/5
+        // Handles the form submission to delete a resource
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -150,9 +157,23 @@ namespace GameDevResources.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Checks if a resource exists in the database
         private bool ResourceExists(int id)
         {
             return _context.Resource.Any(e => e.ID == id);
+        }
+
+        // Generates the icon URL based on the resource's URL
+        private static string GetIconUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return string.Empty;
+            }
+
+            var uri = new Uri(url);
+            var hostname = uri.Host;
+            return $"https://icons.duckduckgo.com/ip2/{hostname}.ico";
         }
     }
 }

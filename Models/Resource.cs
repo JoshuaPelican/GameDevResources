@@ -23,6 +23,9 @@ namespace GameDevResources.Models
         [Required]
         [MinLength(1)]
         public List<string> Tags { get; set; } = new List<string>();
+
+        [Url]
+        public string? Icon { get; set; }
     }
 }
 

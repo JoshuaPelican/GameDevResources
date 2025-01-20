@@ -30,8 +30,8 @@
             <tr>
                 <td>
                     <a href="@item.URL" target="_blank">
+                        <img src="@item.Icon" alt="Icon" width="16" height="16" />
                         @Html.DisplayFor(modelItem => item.Name)
-
                     </a>
                 </td>
                 <td class="table-cell-min">
@@ -51,7 +51,9 @@
                     }
                 </td>
                 <td class="table-cell-min">
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
         }

@@ -17,7 +17,8 @@ public static class SeedData
                 Type = ResourceType.Website,
                 URL = "https://docs.unity3d.com/",
                 Pricing = PricingModel.Free,
-                Tags = ["Documentation", "Unity"]
+                Tags = ["Documentation", "Unity"],
+                Icon = "https://icons.duckduckgo.com/ip2/docs.unity3d.com.ico"
             },
             new Resource
             {
@@ -25,7 +26,8 @@ public static class SeedData
                 Type = ResourceType.Tool,
                 URL = "https://www.blender.org/",
                 Pricing = PricingModel.Free,
-                Tags = ["3D Modeling", "Animation"]
+                Tags = ["3D Modeling", "Animation"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.blender.org.ico"
             },
             new Resource
             {
@@ -33,7 +35,8 @@ public static class SeedData
                 Type = ResourceType.Tool,
                 URL = "https://www.gimp.org/",
                 Pricing = PricingModel.Free,
-                Tags = ["Image Editing", "Open Source"]
+                Tags = ["Image Editing", "Open Source"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.gimp.org.ico"
             },
             new Resource
             {
@@ -41,7 +44,8 @@ public static class SeedData
                 Type = ResourceType.Website,
                 URL = "https://www.unrealengine.com/marketplace",
                 Pricing = PricingModel.Paid,
-                Tags = ["Assets", "Marketplace"]
+                Tags = ["Assets", "Marketplace"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.unrealengine.com.ico"
             },
             new Resource
             {
@@ -49,7 +53,8 @@ public static class SeedData
                 Type = ResourceType.Website,
                 URL = "https://texturehaven.com/",
                 Pricing = PricingModel.Free,
-                Tags = ["Textures", "Free Resources"]
+                Tags = ["Textures", "Free Resources"],
+                Icon = "https://icons.duckduckgo.com/ip2/texturehaven.com.ico"
             },
             new Resource
             {
@@ -57,7 +62,8 @@ public static class SeedData
                 Type = ResourceType.Tool,
                 URL = "https://www.mixamo.com/",
                 Pricing = PricingModel.Freemium,
-                Tags = ["Animation", "Character Rigging"]
+                Tags = ["Animation", "Character Rigging"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.mixamo.com.ico"
             },
             new Resource
             {
@@ -65,7 +71,8 @@ public static class SeedData
                 Type = ResourceType.Generator,
                 URL = "https://www.codeandweb.com/free-sprite-sheet-packer",
                 Pricing = PricingModel.Free,
-                Tags = ["Sprite", "Generator"]
+                Tags = ["Sprite", "Generator"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.codeandweb.com.ico"
             },
             new Resource
             {
@@ -73,7 +80,8 @@ public static class SeedData
                 Type = ResourceType.Tool,
                 URL = "https://www.mapeditor.org/",
                 Pricing = PricingModel.Free,
-                Tags = ["Map Editor", "Tilemap"]
+                Tags = ["Map Editor", "Tilemap"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.mapeditor.org.ico"
             },
             new Resource
             {
@@ -81,7 +89,8 @@ public static class SeedData
                 Type = ResourceType.Website,
                 URL = "https://docs.godotengine.org/",
                 Pricing = PricingModel.Free,
-                Tags = ["Documentation", "Godot"]
+                Tags = ["Documentation", "Godot"],
+                Icon = "https://icons.duckduckgo.com/ip2/docs.godotengine.org.ico"
             },
             new Resource
             {
@@ -89,7 +98,8 @@ public static class SeedData
                 Type = ResourceType.Tool,
                 URL = "https://www.adobe.com/products/photoshop.html",
                 Pricing = PricingModel.Paid,
-                Tags = ["Image Editing", "Adobe"]
+                Tags = ["Image Editing", "Adobe"],
+                Icon = "https://icons.duckduckgo.com/ip2/www.adobe.com.ico"
             }
         );
 
