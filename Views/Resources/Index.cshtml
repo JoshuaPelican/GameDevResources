@@ -30,7 +30,7 @@
             <tr>
                 <td>
                     <a href="@item.URL" target="_blank">
-                        <img src="@item.Icon" alt="Icon" width="16" height="16" />
+                        <img src="@item.Icon" onerror="this.src='~/favicon.ico';" alt="Icon" width="16" height="16" />
                         @Html.DisplayFor(modelItem => item.Name)
                     </a>
                 </td>

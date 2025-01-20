@@ -39,7 +39,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Tags" value="@String.Join(',', Model.Tags)" class="form-control" placeholder="Enter tags separated by commas" />
+                <input id="tagInput" type="text" class="form-control" placeholder="Enter tags" />
+                <div id="tagsContainer" class="mt-2">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <span class="chip" data-tag="@tag">@tag <button type="button" class="close" data-tag="@tag">&times;</button></span>
+                    }
+                </div>
+                <input type="hidden" asp-for="Tags" id="tagsHidden" value="@string.Join(",", Model.Tags)" />
                 <span asp-validation-for="Tags" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -57,4 +64,5 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="~/js/tagInput.js"></script>
 }

@@ -8,20 +8,17 @@ namespace GameDevResources.Models
         public int ID { get; set; }
 
         [Required, StringLength(60, MinimumLength = 2)]
-        public string? Name { get; set; }
+        public required string Name { get; set; }
 
         [EnumDataType(typeof(ResourceType))]
         public ResourceType Type { get; set; }
 
-        [Url]
-        public string? URL { get; set; }
+        [Required, Url]
+        public required string URL { get; set; }
 
-        [EnumDataType(typeof(PricingModel))]
-        [Required]
+        [Required, EnumDataType(typeof(PricingModel))]
         public PricingModel Pricing { get; set; }
 
-        [Required]
-        [MinLength(1)]
         public List<string> Tags { get; set; } = new List<string>();
 
         [Url]

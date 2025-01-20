@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GameDevResources.Data;
+﻿using GameDevResources.Data;
 using GameDevResources.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameDevResources.Controllers
 {
@@ -102,7 +97,10 @@ namespace GameDevResources.Controllers
                 try
                 {
                     resource.Icon = GetIconUrl(resource.URL);
-                    resource.Tags = resource.Tags[0].Split(",").ToList();
+                    if (String.IsNullOrWhiteSpace(resource.Tags[0]))
+                        resource.Tags = new List<string>();
+                    else
+                        resource.Tags = resource.Tags[0].Split(",", StringSplitOptions.TrimEntries).Where(t => !string.IsNullOrEmpty(t)).ToList();
                     _context.Update(resource);
                     await _context.SaveChangesAsync();
                 }
@@ -173,7 +171,30 @@ namespace GameDevResources.Controllers
 
             var uri = new Uri(url);
             var hostname = uri.Host;
-            return $"https://icons.duckduckgo.com/ip2/{hostname}.ico";
+            return $"https://icons.duckduckgo.com/ip3/{hostname}.ico";
+        }
+
+        // GET: Resources/GetTagSuggestions
+        // Provides tag suggestions based on existing tags
+        [HttpGet]
+        public JsonResult GetTagSuggestions(string term)
+        {
+            if (string.IsNullOrEmpty(term) || term.Length < 2)
+            {
+                return Json(new List<string>());
+            }
+
+            var suggestions = _context.Resource
+                .SelectMany(r => r.Tags)
+                .Where(t => t.StartsWith(term))
+                .GroupBy(t => t)
+                .Select(g => new { Tag = g.Key, Count = g.Count() })
+                .OrderByDescending(g => g.Count)
+                .Take(5)
+                .Select(g => g.Tag)
+                .ToList();
+
+            return Json(suggestions);
         }
     }
 }
